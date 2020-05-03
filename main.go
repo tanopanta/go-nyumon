@@ -28,6 +28,7 @@ func main() {
 	// evenOdd()
 	omikuji()
 	kataCast()
+	sliceDemo()
 }
 
 func evenOdd() {
@@ -63,4 +64,19 @@ func kataCast() {
 	if avg > 4.5 { 
 		println("good") 
 	}
+}
+
+func sliceDemo() {
+	// n1 := 19
+	// n2 := 86
+	// n3 := 1
+	// n4 := 12
+	// sum := n1 + n2 + n3 + n4
+
+	num := []int{19, 86, 1, 12}
+	var sum int
+	for i := 0; i < len(num); i++ {
+		sum += num[i]
+	}
+	println(sum)
 }
