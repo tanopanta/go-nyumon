@@ -19,4 +19,16 @@ func main() {
 	)
 	println(a, b, c)
 
+	evenOdd()
+
+}
+
+func evenOdd() {
+	for i := 1; i <= 100; i++ {
+		if i % 2 == 0 {
+			println("偶数 - ", i)
+		} else {
+			println("奇数 - ", i)
+		}
+	}
 }
