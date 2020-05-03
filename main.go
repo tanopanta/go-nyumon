@@ -1,5 +1,11 @@
 package main
 
+import (
+	"math/rand"
+	"strconv"
+	"time"
+)
+
 func main() {
 	var msg string = "Hello"
 	msg2 := "World"
@@ -19,8 +25,8 @@ func main() {
 	)
 	println(a, b, c)
 
-	evenOdd()
-
+	// evenOdd()
+	omikuji()
 }
 
 func evenOdd() {
@@ -30,5 +36,21 @@ func evenOdd() {
 		} else {
 			println("奇数 - ", i)
 		}
+	}
+}
+
+func omikuji() {
+	rand.Seed(time.Now().UnixNano())
+	n := rand.Intn(6) + 1
+	print(strconv.Itoa(n) + ":")
+	switch n {
+	case 1:
+		println("凶")
+	case 2, 3:
+		println("吉")
+	case 4, 5:
+		println("中吉")
+	case 6:
+		println("大吉") 
 	}
 }
