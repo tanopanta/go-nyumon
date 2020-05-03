@@ -27,6 +27,7 @@ func main() {
 
 	// evenOdd()
 	omikuji()
+	kataCast()
 }
 
 func evenOdd() {
@@ -52,5 +53,14 @@ func omikuji() {
 		println("中吉")
 	case 6:
 		println("大吉") 
+	}
+}
+
+func kataCast() {
+	var sum int 
+	sum = 5 + 6 + 3 
+	avg := float32(sum) / 3 
+	if avg > 4.5 { 
+		println("good") 
 	}
 }
