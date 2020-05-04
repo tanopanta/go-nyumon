@@ -80,3 +80,10 @@ func sliceDemo() {
 	}
 	println(sum)
 }
+
+// Score はゲームスコア用の型です
+type Score struct {
+	User string
+	GameNumber int
+	Point int
+}
