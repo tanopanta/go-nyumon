@@ -29,11 +29,14 @@ func main() {
 	omikuji()
 	kataCast()
 	sliceDemo()
+	println(名前付き戻り値(true))
+	println(名前付き戻り値(false))
+
 }
 
 func evenOdd() {
 	for i := 1; i <= 100; i++ {
-		if i % 2 == 0 {
+		if i%2 == 0 {
 			println("偶数 - ", i)
 		} else {
 			println("奇数 - ", i)
@@ -53,16 +56,16 @@ func omikuji() {
 	case 4, 5:
 		println("中吉")
 	case 6:
-		println("大吉") 
+		println("大吉")
 	}
 }
 
 func kataCast() {
-	var sum int 
-	sum = 5 + 6 + 3 
-	avg := float32(sum) / 3 
-	if avg > 4.5 { 
-		println("good") 
+	var sum int
+	sum = 5 + 6 + 3
+	avg := float32(sum) / 3
+	if avg > 4.5 {
+		println("good")
 	}
 }
 
@@ -83,7 +86,18 @@ func sliceDemo() {
 
 // Score はゲームスコア用の型です
 type Score struct {
-	User string
+	User       string
 	GameNumber int
-	Point int
+	Point      int
+}
+
+func 名前付き戻り値(flag bool) (x int) {
+	if flag {
+		print("型のデフォルト値を返します")
+		return
+	} else {
+		print("処理結果を返します")
+		x = 1 + 1
+		return
+	}
 }
