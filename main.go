@@ -41,6 +41,7 @@ func main() {
 	println(n, m)
 	swap2(&n, &m)
 	println(n, m)
+	receiver()
 }
 
 func evenOdd() {
@@ -117,4 +118,17 @@ func swap(x int, y int) (int, int) {
 
 func swap2(x *int, y *int) {
 	x, y = y, x
+}
+
+// MyInt はintに機能を足すための型
+type MyInt int
+
+// Inc はインクリメンタル処理
+func (n *MyInt) Inc() { *n++ }
+
+func receiver() {
+	var n MyInt
+	println(n)
+	n.Inc()
+	println(n)
 }
