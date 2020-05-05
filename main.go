@@ -32,6 +32,15 @@ func main() {
 	println(名前付き戻り値(true))
 	println(名前付き戻り値(false))
 
+	f := func() {
+		println("My name is 無名関数")
+	}
+	f()
+
+	n, m := swap(10, 20)
+	println(n, m)
+	swap2(&n, &m)
+	println(n, m)
 }
 
 func evenOdd() {
@@ -100,4 +109,12 @@ func 名前付き戻り値(flag bool) (x int) {
 		x = 1 + 1
 		return
 	}
+}
+
+func swap(x int, y int) (int, int) {
+	return y, x
+}
+
+func swap2(x *int, y *int) {
+	x, y = y, x
 }
