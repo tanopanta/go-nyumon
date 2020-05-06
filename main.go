@@ -4,6 +4,8 @@ import (
 	"math/rand"
 	"strconv"
 	"time"
+
+	"github.com/tanopanta/go-nyumon/greeting"
 )
 
 func main() {
@@ -42,6 +44,8 @@ func main() {
 	swap2(&n, &m)
 	println(n, m)
 	receiver()
+
+	println(greeting.Do())
 }
 
 func evenOdd() {
