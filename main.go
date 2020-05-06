@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
+	"os"
 	"strconv"
 	"time"
 
@@ -46,6 +48,8 @@ func main() {
 	receiver()
 
 	println(greeting.Do())
+
+	fmt.Println(os.Args)
 }
 
 func evenOdd() {
