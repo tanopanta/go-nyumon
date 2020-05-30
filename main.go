@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"os"
 	"strconv"
 	"time"
 
@@ -13,51 +12,53 @@ import (
 func main() {
 	var msg string = "Hello"
 	msg2 := "World"
-	println(msg, msg2)
+	fmt.Println(msg, msg2)
 
 	runeA := 'A'
 	runeB := 'B'
-	println(runeA, runeB)
+	fmt.Println(runeA, runeB)
 
 	const kata string = "katakata"
-	println(kata)
+	fmt.Println(kata)
 
 	const (
 		a = iota
 		b
 		c
 	)
-	println(a, b, c)
+	fmt.Println(a, b, c)
 
 	// evenOdd()
 	omikuji()
 	kataCast()
 	sliceDemo()
-	println(名前付き戻り値(true))
-	println(名前付き戻り値(false))
+	fmt.Println(名前付き戻り値(true))
+	fmt.Println(名前付き戻り値(false))
 
 	f := func() {
-		println("My name is 無名関数")
+		fmt.Println("My name is 無名関数")
 	}
 	f()
 
 	n, m := swap(10, 20)
-	println(n, m)
+	fmt.Println(n, m)
 	swap2(&n, &m)
-	println(n, m)
+	fmt.Println(n, m)
 	receiver()
 
-	println(greeting.Do())
+	fmt.Println(greeting.Do())
 
-	fmt.Println(os.Args)
+	// fmt.Println(os.Args)
+
+	interfaceSample()
 }
 
 func evenOdd() {
 	for i := 1; i <= 100; i++ {
 		if i%2 == 0 {
-			println("偶数 - ", i)
+			fmt.Println("偶数 - ", i)
 		} else {
-			println("奇数 - ", i)
+			fmt.Println("奇数 - ", i)
 		}
 	}
 }
@@ -68,13 +69,13 @@ func omikuji() {
 	print(strconv.Itoa(n) + ":")
 	switch n {
 	case 1:
-		println("凶")
+		fmt.Println("凶")
 	case 2, 3:
-		println("吉")
+		fmt.Println("吉")
 	case 4, 5:
-		println("中吉")
+		fmt.Println("中吉")
 	case 6:
-		println("大吉")
+		fmt.Println("大吉")
 	}
 }
 
@@ -83,7 +84,7 @@ func kataCast() {
 	sum = 5 + 6 + 3
 	avg := float32(sum) / 3
 	if avg > 4.5 {
-		println("good")
+		fmt.Println("good")
 	}
 }
 
@@ -99,7 +100,7 @@ func sliceDemo() {
 	for i := 0; i < len(num); i++ {
 		sum += num[i]
 	}
-	println(sum)
+	fmt.Println(sum)
 }
 
 // Score はゲームスコア用の型です
@@ -136,7 +137,54 @@ func (n *MyInt) Inc() { *n++ }
 
 func receiver() {
 	var n MyInt
-	println(n)
+	fmt.Println(n)
 	n.Inc()
-	println(n)
+	fmt.Println(n)
+}
+
+// Stringer は 文字列屋さんです
+type Stringer interface {
+	String() string
+}
+
+// GameID は ゲームIDです
+type GameID int
+
+// UserID は ゲームIDです
+type UserID int
+
+// AdminID は ゲームIDです
+type AdminID int
+
+func (g GameID) String() string {
+	return fmt.Sprintf("g-%x", int(g))
+}
+func (u UserID) String() string {
+	return fmt.Sprintf("u-%x", int(u))
+}
+func (a AdminID) String() string {
+	return fmt.Sprintf("a-%x", int(a))
+}
+
+func interfaceSample() {
+	var gameID Stringer = GameID(1)
+	var userID Stringer = UserID(2)
+	var adminID Stringer = AdminID(3)
+	printStringer(gameID)
+	printStringer(userID)
+	printStringer(adminID)
+
+}
+
+func printStringer(s Stringer) {
+	switch v := s.(type) {
+	case UserID:
+		fmt.Println("UserID:", v)
+	case GameID:
+		fmt.Println("GameID:", v)
+	case AdminID:
+		fmt.Println("AdminID:", v)
+	}
+
+	// fmt.Println(reflect.TypeOf(s).Name(), s.String())
 }
