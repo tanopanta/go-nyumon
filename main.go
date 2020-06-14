@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"strconv"
 	"time"
 
@@ -51,6 +52,22 @@ func main() {
 	// fmt.Println(os.Args)
 
 	interfaceSample()
+
+	nn := GameID(222)
+	s, error := toStringer(nn)
+	if error != nil {
+		fmt.Fprint(os.Stderr, "ERROR:", error)
+	} else {
+		fmt.Println(s)
+	}
+
+	canotCast := 222
+	s, error = toStringer(canotCast)
+	if error != nil {
+		fmt.Fprint(os.Stderr, "ERROR:", error)
+	} else {
+		fmt.Println(s)
+	}
 }
 
 func evenOdd() {
@@ -112,10 +129,10 @@ type Score struct {
 
 func 名前付き戻り値(flag bool) (x int) {
 	if flag {
-		print("型のデフォルト値を返します")
+		fmt.Println("型のデフォルト値を返します")
 		return
 	} else {
-		print("処理結果を返します")
+		fmt.Println("処理結果を返します")
 		x = 1 + 1
 		return
 	}
@@ -157,13 +174,13 @@ type UserID int
 type AdminID int
 
 func (g GameID) String() string {
-	return fmt.Sprintf("g-%x", int(g))
+	return fmt.Sprintf("g-%d", int(g))
 }
 func (u UserID) String() string {
-	return fmt.Sprintf("u-%x", int(u))
+	return fmt.Sprintf("u-%d", int(u))
 }
 func (a AdminID) String() string {
-	return fmt.Sprintf("a-%x", int(a))
+	return fmt.Sprintf("a-%d", int(a))
 }
 
 func interfaceSample() {
@@ -187,4 +204,21 @@ func printStringer(s Stringer) {
 	}
 
 	// fmt.Println(reflect.TypeOf(s).Name(), s.String())
+}
+
+// StringerError は Stringerのユーザー定義エラーです
+type StringerError string
+
+func (e StringerError) Error() string {
+	return string(e)
+}
+
+func toStringer(v interface{}) (Stringer, error) {
+	s, error := v.(Stringer)
+
+	if !error {
+		return nil, StringerError("CastError")
+	}
+
+	return s, nil
 }
