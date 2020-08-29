@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
@@ -46,7 +47,22 @@ func main() {
 	tpl = template.Must(template.New("omi").
 		Parse("<html><body>{{.Name}} さんの運勢は <strong>{{.Omifuda}}</strong> です！</body></html>"))
 
-	http.HandleFunc("/", handler)
-	http.HandleFunc("/omikuji", omikujiHandeler)
-	http.ListenAndServe(":8080", nil)
+	go func() {
+		http.HandleFunc("/", handler)
+		http.HandleFunc("/omikuji", omikujiHandeler)
+		http.ListenAndServe(":8080", nil)
+	}()
+
+	resp, err := http.Get("http://localhost:8080/omikuji?name=ほにゃらら")
+	if err != nil {
+		fmt.Printf("リクエストに失敗しました: %v\n", err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("レスポンスの読み込みに失敗しました: %v\n", err)
+	}
+	fmt.Println(string(byteArray))
+
 }
