@@ -13,7 +13,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func omikujiHandeler(w http.ResponseWriter, r *http.Request) {
 	num := rand.Intn(4)
-	fmt.Fprint(w, Omifuda(num).String())
+
+	name := "名無し"
+	if n := r.FormValue("name"); n != "" {
+		name = n
+	}
+
+	fmt.Fprintf(w, "%sさんの運勢は %s !\n", name, Omifuda(num).String())
 }
 func main() {
 	rand.Seed(time.Now().UnixNano())
