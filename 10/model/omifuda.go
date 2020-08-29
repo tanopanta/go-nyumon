@@ -1,4 +1,4 @@
-package main
+package model
 
 // Omifuda はおみくじの札です
 type Omifuda int
